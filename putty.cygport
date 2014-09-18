@@ -1,0 +1,40 @@
+NAME="putty"
+VERSION=0.63
+RELEASE=1
+CATEGORY="Net"
+SUMMARY="Telnet/SSH client"
+DESCRIPTION="PuTTY is a free implementation of Telnet and SSH for Windows and
+Unix platforms, along with an xterm terminal emulator."
+HOMEPAGE="http://www.chiark.greenend.org.uk/~sgtatham/putty/"
+SRC_URI="http://the.earth.li/~sgtatham/putty/latest/putty-${VERSION}.tar.gz"
+PATCH_URI="0.63-static-gssapi.patch"
+
+DIFF_EXCLUDES="icons"
+
+src_compile() {
+	cd ${B}
+	CYGCONF_SOURCE=${S}/unix
+	# dlopen: link directly with gssapi
+	cygconf ac_cv_search_dlopen=no
+	cygmake
+	cygmake -C ${S}/icons
+}
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	for p in pterm putty
+	do
+		for i in 16 32 48
+		do
+			insinto /usr/share/icons/hicolor/${i}x${i}/apps
+			newins ${S}/icons/${p}-${i}.png ${p}.png
+		done
+	done
+	make_desktop_entry pterm "PuTTY Terminal" pterm "System;TerminalEmulator"
+	make_desktop_entry putty "PuTTY" putty "Network;RemoteAccess"
+
+	docinto html
+	dodoc ${S}/doc/*.html
+}

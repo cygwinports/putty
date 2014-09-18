@@ -1,0 +1,11 @@
+--- origsrc/putty-0.63/pgssapi.h	2010-08-10 12:21:25.000000000 -0500
++++ src/putty-0.63/pgssapi.h	2014-09-18 02:26:42.077066200 -0500
+@@ -14,7 +14,7 @@
+  * However, we still need the function pointer types, because even
+  * with statically linked GSSAPI we use the ssh_gss_library wrapper.
+  */
+-#ifdef STATIC_GSSAPI
++#ifdef NO_LIBDL
+ #include <gssapi/gssapi.h>
+ typedef gss_OID const_gss_OID;	       /* for our prototypes below */
+ #else /* STATIC_GSSAPI */
