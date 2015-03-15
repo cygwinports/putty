@@ -1,5 +1,5 @@
 NAME="putty"
-VERSION=0.63
+VERSION=0.64
 RELEASE=1
 CATEGORY="Net"
 SUMMARY="Telnet/SSH client"
@@ -13,10 +13,9 @@ DIFF_EXCLUDES="icons"
 
 src_compile() {
 	cd ${B}
-	CYGCONF_SOURCE=${S}/unix
 	# dlopen: link directly with gssapi
 	cygconf ac_cv_search_dlopen=no
-	cygmake
+	cygmake WARNINGOPTS=-Wall
 	cygmake -C ${S}/icons
 }
 
