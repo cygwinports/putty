@@ -1,13 +1,16 @@
 NAME="putty"
 VERSION=0.65
-RELEASE=1
+RELEASE=2
 CATEGORY="Net"
 SUMMARY="Telnet/SSH client"
 DESCRIPTION="PuTTY is a free implementation of Telnet and SSH for Windows and
 Unix platforms, along with an xterm terminal emulator."
 HOMEPAGE="http://www.chiark.greenend.org.uk/~sgtatham/putty/"
 SRC_URI="http://the.earth.li/~sgtatham/putty/latest/putty-${VERSION}.tar.gz"
-PATCH_URI="0.63-static-gssapi.patch"
+PATCH_URI="
+	http://pkgs.fedoraproject.org/cgit/putty.git/plain/putty-0.65-CVE-2015-5309.patch
+	0.63-static-gssapi.patch
+"
 
 DIFF_EXCLUDES="icons"
 
