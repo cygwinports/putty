@@ -1,5 +1,5 @@
 NAME="putty"
-VERSION=0.67
+VERSION=0.69
 RELEASE=1
 CATEGORY="Net"
 SUMMARY="Telnet/SSH client"
